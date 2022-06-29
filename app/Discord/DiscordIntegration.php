@@ -1,11 +1,9 @@
 <?php
 
-
 namespace PlatformNotificationApp\Discord;
 
 class DiscordIntegration extends \WC_Integration
 {
-
     public function __construct ()
     {
         global $woocommerce;
@@ -27,9 +25,11 @@ class DiscordIntegration extends \WC_Integration
 
         // Filters.
         add_filter( 'woocommerce_settings_api_sanitized_fields_' . $this->id, array( $this, 'sanitize_settings' ) );
+
+        $this->handleNotifications();
     }
 
-    public function init_form_fields() {
+    public function init_form_fields () {
         $this->form_fields = array(
             'discord_webhook_url' => array(
                 'title'             => __( 'Discord Webhook URL', APP_TEXTDOMAIN ),
@@ -50,5 +50,11 @@ class DiscordIntegration extends \WC_Integration
 
     public function sanitize_settings( $settings ) {
         return $settings;
+    }
+
+    private function handleNotifications ()
+    {
+        add_action('woocommerce_order_status_completed', array( new NotificationOnStatusChange , 'onOrderCompleted'));
+        add_action('woocommerce_order_status_processing', array( new NotificationOnStatusChange , 'onOrderProcessing'));
     }
 }
