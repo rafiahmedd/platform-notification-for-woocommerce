@@ -27,7 +27,9 @@ class DiscordIntegration extends \WC_Integration
         // Filters.
         add_filter( 'woocommerce_settings_api_sanitized_fields_' . $this->id, array( $this, 'sanitize_settings' ) );
 
-        $this->handleNotifications();
+        if ( $this->get_option( 'status' ) == 'yes'  ) {
+            $this->handleNotifications();
+        }
     }
 
     public function init_form_fields () {

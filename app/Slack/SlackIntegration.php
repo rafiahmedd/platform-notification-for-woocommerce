@@ -20,6 +20,7 @@ class SlackIntegration extends \WC_Integration
         $this->init_settings();
 
         // Define user set variables.
+        $this->slack_bot_token = $this->get_option( 'slack_bot_token' );
         $this->slack_channel_name = $this->get_option('slack_channel_name');
         $this->slack_channel_id = $this->get_option('slack_channel_id');
 
@@ -29,10 +30,20 @@ class SlackIntegration extends \WC_Integration
         // Filters.
         add_filter( 'woocommerce_settings_api_sanitized_fields_' . $this->id, array( $this, 'sanitize_settings' ) );
 
+        if ( $this->get_option( 'status' ) == 'yes' ) {
+            $this->handleNotifications();
+        }
     }
 
     public function init_form_fields() {
         $this->form_fields = array(
+            'slack_bot_token'   => array(
+                'title'             => __( 'Slack Bot Token', APP_TEXTDOMAIN ),
+                'type'              => 'password',
+                'desc_tip'          => true,
+                'description'       => __( 'Enter your slack bot token.', APP_TEXTDOMAIN ),
+                'default'           => ''
+            ),
             'slack_channel_name' => array(
                 'title'             => __( 'Slack Channel Name', APP_TEXTDOMAIN ),
                 'type'              => 'text',
@@ -59,5 +70,10 @@ class SlackIntegration extends \WC_Integration
 
     public function sanitize_settings( $settings ) {
         return $settings;
+    }
+
+    private function handleNotifications ()
+    {
+        add_action('woocommerce_order_status_changed', array( new NotificationOnStatusChange , 'onStatusChanged'), 10, 3);
     }
 }
