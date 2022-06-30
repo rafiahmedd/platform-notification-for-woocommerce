@@ -3,9 +3,14 @@ namespace PlatformNotificationApp\Discord;
 
 class DiscordApi
 {
-    public static function sendNotification($url, $message)
+    private static function getWebhookUrl()
     {
-        $response = wp_remote_post( $url, array(
+        return get_option('woocommerce_wc_discord_integration_settings')['discord_webhook_url'];
+    }
+
+    public static function sendNotification( $message )
+    {
+        $response = wp_remote_post( static::getWebhookUrl(), array(
             'body' => ['payload_json' => json_encode( $message )],
             'content-type' => 'application/json',
         ) );

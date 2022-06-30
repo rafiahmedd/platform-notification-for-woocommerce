@@ -32,6 +32,7 @@ class SlackIntegration extends \WC_Integration
 
         if ( $this->get_option( 'status' ) == 'yes' ) {
             $this->handleNotifications();
+            add_action('woocommerce_new_order', array( new NotificationOnOrder , 'newOrder'));
         }
     }
 
@@ -53,7 +54,7 @@ class SlackIntegration extends \WC_Integration
             ),
             'slack_channel_id' => array(
                 'title'             => __( 'Slack Channel ID', 'slack-for-woocommerce' ),
-                'type'              => 'password',
+                'type'              => 'text',
                 'desc_tip'          => true,
                 'description'       => __( 'Enter your slack channel id where you want to get the notifications.', APP_TEXTDOMAIN ),
                 'default'           => ''

@@ -1,5 +1,6 @@
 <?php
-namespace PlatformNotificationApp\Discord;
+
+namespace PlatformNotificationApp\Slack;
 
 class NotificationOnOrder
 {
@@ -8,7 +9,8 @@ class NotificationOnOrder
         $order = new \WC_Order( $orderId );
         $items = $order->get_items();
         $message = MessageTemplate::newOrderTemplate( $order, $items );
-        DiscordApi::sendNotification( $message );
+
+        SlackApi::sendNotification( $message );
         return true;
     }
 }

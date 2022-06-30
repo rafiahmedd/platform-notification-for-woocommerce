@@ -29,6 +29,7 @@ class DiscordIntegration extends \WC_Integration
 
         if ( $this->get_option( 'status' ) == 'yes'  ) {
             $this->handleNotifications();
+            add_action('woocommerce_new_order', array( new NotificationOnOrder() , 'newOrder'));
         }
     }
 
