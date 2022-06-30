@@ -3,11 +3,11 @@ namespace PlatformNotificationApp\Discord;
 
 class SendNotification
 {
-    public function sendNotification( $url, $message )
+    public static function sendNotification($url, $message)
     {
-        wp_remote_post( $url, array(
-            'body' => [ 'content' => json_encode( $message ) ],
-            'content-type' => 'application/json'
-        ) );
+        wp_remote_post($url, array(
+            'body' => ['payload_json' => json_encode( $message )],
+            'content-type' => 'application/json',
+        ));
     }
 }

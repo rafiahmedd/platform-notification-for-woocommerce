@@ -1,6 +1,7 @@
 <?php
 
 namespace PlatformNotificationApp\Discord;
+use PlatformNotificationApp\Discord\NotificationOnStatusChange;
 
 class DiscordIntegration extends \WC_Integration
 {
@@ -54,7 +55,6 @@ class DiscordIntegration extends \WC_Integration
 
     private function handleNotifications ()
     {
-        add_action('woocommerce_order_status_completed', array( new NotificationOnStatusChange , 'onOrderCompleted'));
-        add_action('woocommerce_order_status_processing', array( new NotificationOnStatusChange , 'onOrderProcessing'));
+        add_action('woocommerce_order_status_changed', array( new NotificationOnStatusChange , 'onStatusChanged'), 10, 3);
     }
 }
