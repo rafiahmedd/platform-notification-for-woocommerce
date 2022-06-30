@@ -32,7 +32,6 @@ class SlackIntegration extends \WC_Integration
 
         if ( $this->get_option( 'status' ) == 'yes' ) {
             $this->handleNotifications();
-            add_action('woocommerce_new_order', array( new NotificationOnOrder , 'newOrder'));
         }
     }
 
@@ -76,5 +75,6 @@ class SlackIntegration extends \WC_Integration
     private function handleNotifications ()
     {
         add_action('woocommerce_order_status_changed', array( new NotificationOnStatusChange , 'onStatusChanged'), 10, 3);
+        add_action('woocommerce_new_order', array( new NotificationOnOrder , 'newOrder'));
     }
 }
