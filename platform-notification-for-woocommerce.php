@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Platform Notification For WooCommerce - Get notification on different platform on WooCommerce action
- * Plugin URI: https://wordpress.org/plugins/platform-notification-for-woocommerce/
- * Description: Get notified on slack when a new order is placed in your WooCommerce store.
+ * Plugin Name: Platform Notification For WooCommerce
+ * Plugin URI: https://devrafi.com/platform-notification-for-woocommerce/
+ * Description: Get notification on different platform on WooCommerce action
  * Author: Rafi Ahmed
  * Author URI: https://devrafi.com/
- * Version: 1.0
+ * Version: 1.0.0
  * text-domain: platform-notification-for-woocommerce
  * License: GPLv2 or later
  */
