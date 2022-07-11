@@ -58,6 +58,23 @@ class SlackIntegration extends \WC_Integration
                 'description'       => __( 'Enter your slack channel id where you want to get the notifications.', APP_TEXTDOMAIN ),
                 'default'           => ''
             ),
+            'notifications'         => array(
+                'title'             => __( 'Notifications', APP_TEXTDOMAIN ),
+                'type'              => 'multiselect',
+                'description'       => __( 'Notifications that are enabled at this moment', APP_TEXTDOMAIN ),
+                'default'           => array( 'new_order' ),
+                'options'           => array(
+                    'new_order' => 'New Order',
+                    'pending'   => 'Pending Order',
+                    'processing' => 'Processing Order',
+                    'on-hold'   => 'On Hold Order',
+                    'completed' => 'Completed Order',
+                    'cancelled' => 'Cancelled Order',
+                    'refunded'  => 'Refunded Order',
+                    'failed'    => 'Failed Order',
+                    'all'       => 'On any changes'
+                )
+            ),
             'status' => array(
                 'title'             => __( 'Status', APP_TEXTDOMAIN ),
                 'type'              => 'checkbox',
