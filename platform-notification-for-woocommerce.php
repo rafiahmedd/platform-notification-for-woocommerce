@@ -5,7 +5,7 @@
  * Description: Get notification on different platform on WooCommerce action
  * Author: Rafi Ahmed
  * Author URI: https://devrafi.com/
- * Version: 1.0.0
+ * Version: 1.0.1
  * text-domain: platform-notification-for-woocommerce
  * License: GPLv2 or later
  */
